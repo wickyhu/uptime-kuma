@@ -379,12 +379,8 @@
                                 </div>
                             </template>
 
-							<template v-if="monitor.type === 'oracledb'">
-								<input id="connectionString" v-model="monitor.databaseConnectionString" type="text" class="form-control" placeholder="&quot;user&quot;:&quot;<USER>&quot;,&quot;password&quot;:&quot;<PASSWORD>&quot;,&quot;connectionString&quot;:&quot;(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOSTADDRESS>)(PORT=<PORT>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<SERVICENAME>)))&quot;">
-							</template>
-
-                            <!-- SQL Server / PostgreSQL / MySQL -->
-                            <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql'">
+                            <!-- SQL Server / PostgreSQL / MySQL / Oracle -->
+                            <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql' || monitor.type === 'oracledb' ">
                                 <div class="my-3">
                                     <label for="sqlQuery" class="form-label">{{ $t("Query") }}</label>
                                     <textarea id="sqlQuery" v-model="monitor.databaseQuery" class="form-control" :placeholder="$t('Example:', [ 'SELECT 1' ])"></textarea>
@@ -932,6 +928,7 @@ export default {
                 "sqlserver": "Server=<hostname>,<port>;Database=<your database>;User Id=<your user id>;Password=<your password>;Encrypt=<true/false>;TrustServerCertificate=<Yes/No>;Connection Timeout=<int>",
                 "postgres": "postgres://username:password@host:port/database",
                 "mysql": "mysql://username:password@host:port/database",
+				"oracledb": "\"user\":\"<USER>\",\"password\":\"<PASSWORD>\",\"connectionString\":\"(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOSTADDRESS>)(PORT=<PORT>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<SERVICENAME>)))\"",
                 "redis": "redis://user:password@host:port",
                 "mongodb": "mongodb://username:password@host:port/database",
             },
