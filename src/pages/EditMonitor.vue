@@ -79,7 +79,7 @@
                                         <option value="mongodb">
                                             MongoDB
                                         </option>
-					<option value="oracledb">
+										<option value="oracledb">
                                             Oracle Database
                                         </option>										
                                         <option value="radius">
@@ -478,10 +478,6 @@
                                 </div>
                             </template>
 
-			    <template v-if="monitor.type === 'oracledb'">
-				<input id="connectionString" v-model="monitor.databaseConnectionString" type="text" class="form-control" placeholder="&quot;user&quot;:&quot;<USER>&quot;,&quot;password&quot;:&quot;<PASSWORD>&quot;,&quot;connectionString&quot;:&quot;(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOSTADDRESS>)(PORT=<PORT>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<SERVICENAME>)))&quot;">
-                            </template>
-									
                             <!-- SQL Server / PostgreSQL / MySQL -->
                             <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql'">
                                 <div class="my-3">
@@ -1064,6 +1060,7 @@ export default {
                 "sqlserver": "Server=<hostname>,<port>;Database=<your database>;User Id=<your user id>;Password=<your password>;Encrypt=<true/false>;TrustServerCertificate=<Yes/No>;Connection Timeout=<int>",
                 "postgres": "postgres://username:password@host:port/database",
                 "mysql": "mysql://username:password@host:port/database",
+				"oracledb": "\"user\":\"<USER>\",\"password\":\"<PASSWORD>\",\"connectionString\":\"(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOSTADDRESS>)(PORT=<PORT>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<SERVICENAME>)))\"",
                 "redis": "redis://user:password@host:port",
                 "mongodb": "mongodb://username:password@host:port/database",
             },
