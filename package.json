@@ -118,6 +118,7 @@
         "mqtt": "~4.3.7",
         "mssql": "~11.0.0",
         "mysql2": "~3.9.6",
+	"oracledb": "~5.5.0",
         "nanoid": "~3.3.4",
         "net-snmp": "^3.11.2",
         "node-cloudflared-tunnel": "~1.0.9",

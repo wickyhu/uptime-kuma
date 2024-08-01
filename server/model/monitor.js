@@ -4,7 +4,7 @@ const { Prometheus } = require("../prometheus");
 const { log, UP, DOWN, PENDING, MAINTENANCE, flipStatus, MAX_INTERVAL_SECOND, MIN_INTERVAL_SECOND,
     SQL_DATETIME_FORMAT, evaluateJsonQuery
 } = require("../../src/util");
-const { tcping, ping, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, mssqlQuery, postgresQuery, mysqlQuery, setSetting, httpNtlm, radius, grpcQuery,
+const { tcping, ping, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, mssqlQuery, postgresQuery, mysqlQuery, oracledbQuery, setSetting, httpNtlm, radius, grpcQuery,
     redisPingAsync, kafkaProducerAsync, getOidcTokenClientCredentials, rootCertificatesFingerprints, axiosAbortSignal
 } = require("../util-server");
 const { R } = require("redbean-node");
@@ -814,7 +814,13 @@ class Monitor extends BeanModel {
                     bean.msg = await mysqlQuery(this.databaseConnectionString, this.databaseQuery || "SELECT 1", mysqlPassword);
                     bean.status = UP;
                     bean.ping = dayjs().valueOf() - startTime;
-                } else if (this.type === "radius") {
+                } else if (this.type === "oracledb") {
+                    let startTime = dayjs().valueOf();
+                    await oracledbQuery(this.databaseConnectionString, this.databaseQuery);
+                    bean.msg = "";
+                    bean.status = UP;
+                    bean.ping = dayjs().valueOf() - startTime;
+				        } else if (this.type === "radius") {
                     let startTime = dayjs().valueOf();
 
                     // Handle monitors that were created before the

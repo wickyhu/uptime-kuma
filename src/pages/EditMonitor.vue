@@ -79,6 +79,9 @@
                                         <option value="mongodb">
                                             MongoDB
                                         </option>
+					<option value="oracledb">
+                                            Oracle Database
+                                        </option>										
                                         <option value="radius">
                                             Radius
                                         </option>
@@ -460,7 +463,7 @@
                             </template>
 
                             <!-- SQL Server / PostgreSQL / MySQL / Redis / MongoDB -->
-                            <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql' || monitor.type === 'redis' || monitor.type === 'mongodb'">
+                            <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql' || monitor.type === 'redis' || monitor.type === 'mongodb' || monitor.type === 'oracledb'">
                                 <div class="my-3">
                                     <label for="connectionString" class="form-label">{{ $t("Connection String") }}</label>
                                     <input id="connectionString" v-model="monitor.databaseConnectionString" type="text" class="form-control" required>
@@ -475,6 +478,10 @@
                                 </div>
                             </template>
 
+			    <template v-if="monitor.type === 'oracledb'">
+				<input id="connectionString" v-model="monitor.databaseConnectionString" type="text" class="form-control" placeholder="&quot;user&quot;:&quot;<USER>&quot;,&quot;password&quot;:&quot;<PASSWORD>&quot;,&quot;connectionString&quot;:&quot;(DESCRIPTION =(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOSTADDRESS>)(PORT=<PORT>)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=<SERVICENAME>)))&quot;">
+                            </template>
+									
                             <!-- SQL Server / PostgreSQL / MySQL -->
                             <template v-if="monitor.type === 'sqlserver' || monitor.type === 'postgres' || monitor.type === 'mysql'">
                                 <div class="my-3">
